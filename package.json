@@ -1,0 +1,46 @@
+{
+  "name": "trailgo",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "postinstall": "prisma generate",
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "db:generate": "bunx prisma generate",
+    "db:push": "bunx prisma db push",
+    "db:studio": "bunx prisma studio"
+  },
+  "dependencies": {
+    "@auth/prisma-adapter": "^2.4.2",
+    "@prisma/client": "^5.18.0",
+    "@radix-ui/react-slot": "^1.1.0",
+    "@react-email/components": "0.0.22",
+    "@types/bcryptjs": "^2.4.6",
+    "bcryptjs": "^2.4.3",
+    "class-variance-authority": "^0.7.0",
+    "clsx": "^2.1.1",
+    "lucide-react": "^0.427.0",
+    "mongodb": "^6.8.0",
+    "next": "14.2.5",
+    "next-auth": "^5.0.0-beta.20",
+    "prisma": "^5.18.0",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-email": "2.1.6",
+    "tailwind-merge": "^2.5.0",
+    "tailwindcss-animate": "^1.0.7",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.5",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
+    "typescript": "^5"
+  }
+}
