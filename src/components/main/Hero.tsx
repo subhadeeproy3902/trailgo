@@ -25,12 +25,12 @@ export default function Hero() {
           </a>
           <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
             <Link href="/register"
-              className="text-white bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:outline-none mr-6 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              className="text-white bg-orange-500 hover:bg-orange-600 focus:ring-4 focus:outline-none mr-6 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
               Register
             </Link>
             <Link href="/login"
-              className="text-white bg-orange-700 hover:bg-orange-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              className="text-white bg-muted-foreground focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
               Login
             </Link>
@@ -79,22 +79,22 @@ export default function Hero() {
         width={500}
         height={500}
         src="/bg.webp"
-        className="w-full h-full absolute top-0 left-0 -z-10 object-fill"
+        className="w-full h-full absolute top-0 left-0 -z-10 object-cover"
         alt="Full-Stack-Kit Background"
       />
       <div className="py-12 min-h-screen px-4 sm:px-6 lg:px-8">
         <main>
           <section className="text-center py-12">
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-              Welcome to Full-Stack-kit
+              Welcome to Trailgo
             </h1>
             <h2 className="text-2xl text-gray-700 mb-6">
-              Don&apos;t waste time. Launch your startup now.
+              The best place to find your next adventure
             </h2>
             <p className="max-w-2xl mx-auto text-gray-500 mb-6">
-              Full-Stack-Kit is a complete solution for building web
-              applications. We save you time and money by providing you with
-              everything you need to launch your startup.
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
+              auctor, erat id lacinia ultrices, velit lectus aliquam nisi, nec
+              tempor nunc nunc vel justo
             </p>
             <div className="space-x-4">
               <button className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded">

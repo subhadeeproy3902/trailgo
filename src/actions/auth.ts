@@ -4,7 +4,7 @@ import { signIn, signOut } from "@/lib/auth";
 import { revalidatePath } from "next/cache";
 
 export const login = async (provider: string, role: string) => {
-  await signIn(provider, { redirectTo: "/dashboard" }, {userType: role});
+  await signIn(provider, { redirectTo: "/role" }, { userType: role });
   revalidatePath("/");
 };
 
