@@ -52,32 +52,6 @@ export default function RegisterPage() {
                 </span>
               </h2>
             </div>
-            <ul className="mt-6 flex lg:flex-row flex-col gap-3 w-full mb-4">
-              {radios.map((item, idx) => (
-                <li key={idx} className="w-full">
-                  <label htmlFor={item.name} className="block relative">
-                    <input
-                      id={item.name}
-                      type="radio"
-                      defaultChecked={idx == 1 ? true : false}
-                      name="payment"
-                      className="sr-only peer"
-                      onClick={() =>
-                        setRole(item.name.toUpperCase().replace(" ", "_"))
-                      }
-                    />
-                    <div className="w-full p-5 cursor-pointer rounded-lg border bg-white shadow-sm ring-indigo-600 peer-checked:ring-2 duration-200">
-                      <div className="pl-7">
-                        <h3 className="leading-none text-gray-800 font-medium">
-                          {item.name}
-                        </h3>
-                      </div>
-                    </div>
-                    <span className="block absolute top-5 left-5 border peer-checked:border-[5px] peer-checked:border-indigo-600 w-4 h-4 rounded-full"></span>
-                  </label>
-                </li>
-              ))}
-            </ul>
             <div className="grid grid-cols-1 gap-4 pb-5 w-full md:pb-6 xl:gap-5 xl:pb-7">
               <GoogleButton role={role} />
             </div>
