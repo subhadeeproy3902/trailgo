@@ -2,7 +2,7 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import NextAuth from "next-auth";
 import Google from "next-auth/providers/google";
 import { db } from "./db";
-import { useSearchParams } from "next/navigation";
+import Resend from "next-auth/providers/resend"
 
 export const {
   handlers: { GET, POST },
@@ -23,6 +23,11 @@ export const {
           response_type: "code",
         },
       },
+    }),
+    Resend({
+      // If your environment variable is named differently than default
+      apiKey: process.env.AUTH_RESEND_KEY!,
+      from: "Trailgo <trailgo@mvp-subha.me>"
     }),
   ],
   callbacks: {

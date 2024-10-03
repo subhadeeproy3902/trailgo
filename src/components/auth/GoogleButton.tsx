@@ -2,12 +2,12 @@
 
 import { login } from "@/actions/auth";
 
-const GoogleButton = ({ role }: { role: string }) => {
+const GoogleButton = () => {
   return (
     <button
       className="inline-flex font-medium items-center justify-center active:enabled:translate-y-px focus:outline-none focus-visible:ring-[1.8px] focus-visible:ring-offset-2 ring-offset-background transition-colors duration-200 px-4 py-2 text-sm rounded-md bg-transparent border border-muted dark:backdrop-blur focus-visible:ring-muted hover:text-primary hover:border-primary h-11 w-full"
       type="button"
-      onClick={() => login("google", role)}
+      onClick={() => login("google")}
     >
       <svg
         stroke="currentColor"
