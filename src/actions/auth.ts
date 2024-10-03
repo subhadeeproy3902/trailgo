@@ -2,7 +2,6 @@
 
 import { signIn, signOut } from "@/lib/auth";
 import { revalidatePath } from "next/cache";
-import { redirect } from "next/navigation";
 
 export const login = async (provider: string) => {
   await signIn(provider, { redirectTo: "/role" });
@@ -19,6 +18,7 @@ export const resendLogin = async (email: string) => {
     throw new Error("Invalid email format");
   }
   await signIn("resend", { email });
+  revalidatePath("/");
 }
 
 export const logout = async () => {
