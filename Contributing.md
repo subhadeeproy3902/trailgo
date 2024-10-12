@@ -78,16 +78,6 @@ Thank you for your contribution!!
 
 ![Line](https://user-images.githubusercontent.com/85225156/171937799-8fc9e255-9889-4642-9c92-6df85fb86e82.gif)
 
-## Contribution Points 
-
-*🏆 Contribution Levels:*
-All the tasks will be assigned various levels based on the complexity of the task and skills required to complete it. Every level will provide you a different amount of Points that is:
-- **🥇 Level 1**: 10 Points  
-- **🥈 Level 2**: 25 Points  
-- **🥉 Level 3**: 45 Points  
-
-![Line](https://user-images.githubusercontent.com/85225156/171937799-8fc9e255-9889-4642-9c92-6df85fb86e82.gif)
-
 ## Development Workflow 📈
 
 When contributing to this project, please follow these guidelines:
