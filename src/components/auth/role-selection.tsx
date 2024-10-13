@@ -194,7 +194,7 @@ export default function RoleSelect({ userId }: { userId: string }) {
 
   return (
     <div className="min-h-screen bg-background flex items-center justify-center">
-      <div className="w-full max-w-4xl space-y-8 bg-white dark:bg-zinc-900 shadow-lg rounded-lg overflow-hidden">
+      <div className="w-full max-w-4xl space-y-8 bg-white shadow-lg rounded-lg overflow-hidden">
         <div className="bg-primary text-primary-foreground p-6 text-center">
           <Train className="mx-auto h-16 w-16" />
           <h1 className="mt-4 text-3xl font-bold">RailFreight</h1>

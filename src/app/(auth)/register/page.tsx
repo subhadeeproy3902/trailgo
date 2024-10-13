@@ -27,7 +27,7 @@ export default function RegisterPage() {
         <div className="relative flex w-full items-start pt-4 justify-center lg:w-5/12 2xl:pe-24">
           <div className=" w-full max-w-sm md:max-w-md lg:py-7 lg:ps-3 lg:pt-16 2xl:w-[630px] 2xl:max-w-none 2xl:ps-20 2xl:pt-7">
             <a
-              className="absolute -top-4 start-0 hidden p-3 text-gray-500 dark:text-white hover:text-gray-700 lg:flex lg:items-center 2xl:-top-7 2xl:ps-20 "
+              className="absolute -top-4 start-0 hidden p-3 text-gray-500 hover:text-gray-700 lg:flex lg:items-center 2xl:-top-7 2xl:ps-20 "
               href="/"
             >
               <MoveLeft size={24} />
@@ -133,10 +133,10 @@ export default function RegisterPage() {
                   </svg>
                 </button>
               </div>
-            <p className="font-normal mt-6 text-center leading-loose text-gray-500 dark:text-white lg:mt-8 lg:text-start">
+            <p className="font-normal mt-6 text-center leading-loose text-gray-500 lg:mt-8 lg:text-start">
               Already have an account?{" "}
               <Link
-                className="font-semibold text-gray-700 dark:text-white transition-colors hover:text-blue"
+                className="font-semibold text-gray-700 transition-colors hover:text-blue"
                 href="/login"
               >
                 Log In
@@ -144,7 +144,7 @@ export default function RegisterPage() {
             </p>
           </div>
         </div>
-        <div className="hidden w-7/12 items-center justify-center rounded-[20px] bg-gradient-to-b backdrop-blur-3xl px-6 lg:flex xl:justify-start 2xl:px-16 dark:bg-transparent">
+        <div className="hidden w-7/12 items-center justify-center rounded-[20px] bg-gradient-to-b from-sky-50/50 to-gray-50/50 backdrop-blur-3xl px-6 lg:flex xl:justify-start 2xl:px-16 dark:bg-gray-100/40">
           <div className="pb-8 pt-10 text-center xl:pt-16 2xl:block 2xl:w-[1063px]">
             <div className="flex flex-col justify-between items-center">
               <div className="mx-auto mb-10 max-w-sm pt-2 2xl:max-w-lg">
