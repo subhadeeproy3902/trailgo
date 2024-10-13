@@ -25,6 +25,7 @@ import {
 import Image from "next/image";
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { ModeToggle } from "@/components/ui/ThemeToggle";
 
 export default async function DashLayout({
   children,
@@ -165,6 +166,7 @@ export default async function DashLayout({
               </div>
             </form>
           </div>
+          <ModeToggle />
           <UserButton />
         </header>
         <main className="flex max-h-screen flex-1 flex-col gap-4 overflow-y-auto p-4 lg:gap-6">

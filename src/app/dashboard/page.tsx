@@ -22,7 +22,7 @@ export default function Dashboard() {
             </Tabs>
           </CardHeader>
           <CardContent>
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-2 gap-4 dark:text-black">
               {[
                 { name: "Train A1", income: "10,000", color: "bg-blue-100" },
                 { name: "Train B2", income: "20,800", color: "bg-pink-100" },

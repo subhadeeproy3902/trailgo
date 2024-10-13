@@ -2,10 +2,20 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { useTheme } from "next-themes";
+import { ModeToggle } from "../ui/ThemeToggle";
 
 export default function Hero() {
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const { systemTheme, theme } = useTheme();
+  const currentTheme = theme === "system" ? systemTheme : theme; 
+  const [darkMode, setDarkMode] = useState(false);
+  
+  useEffect(() => {
+    setDarkMode(currentTheme === "dark");
+  }, [currentTheme]);
 
   return (
     <>
@@ -23,17 +33,24 @@ export default function Hero() {
               alt="Full-Stack-Kit Logo"
             />
           </a>
-          <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-            <Link href="/register"
+          <div className="flex gap-2 md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
+            <button>
+              <ModeToggle />
+            </button>
+
+            <Link
+              href="/register"
               className="text-white bg-orange-500 hover:bg-orange-600 focus:ring-4 focus:outline-none mr-6 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
               Register
             </Link>
-            <Link href="/login"
+            <Link
+              href="/login"
               className="text-white bg-muted-foreground focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
               Login
             </Link>
+
             <button
               data-collapse-toggle="navbar-sticky"
               type="button"
@@ -44,7 +61,7 @@ export default function Hero() {
             </button>
           </div>
           <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1">
-            <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg  md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0  dark:bg-gray-800 dark:border-gray-700">
+            <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg  md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 dark:border-gray-700">
               {menuItem.map((item) => (
                 <li key={item.name}>
                   <a
@@ -85,13 +102,13 @@ export default function Hero() {
       <div className="py-12 min-h-screen px-4 sm:px-6 lg:px-8">
         <main>
           <section className="text-center py-12">
-            <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+            <h1 className={`${darkMode ? "text-white" : "text-gray-900"} text-4xl md:text-5xl font-bold mb-4`}>
               Welcome to Trailgo
             </h1>
-            <h2 className="text-2xl text-gray-700 mb-6">
+            <h2 className={`${darkMode ? "text-white" : "text-gray-700"} text-2xl mb-6`}>
               The best place to find your next adventure
             </h2>
-            <p className="max-w-2xl mx-auto text-gray-500 mb-6">
+            <p className={`${darkMode ? "text-white" : "text-gray-500"} max-w-2xl mx-auto mb-6`}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
               auctor, erat id lacinia ultrices, velit lectus aliquam nisi, nec
               tempor nunc nunc vel justo
@@ -106,12 +123,12 @@ export default function Hero() {
             </div>
           </section>
           <section className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center p-4 bg-white border rounded-lg">
+            <div className="text-center p-4 bg-white dark:bg-black  border rounded-lg">
               <ThumbsUpIcon className="text-yellow-400 w-6 h-6 mx-auto mb-2" />
-              <h4 className="font-semibold text-lg text-black">
+              <h4 className="font-semibold text-lg text-black dark:text-white">
                 Service we can help you with
               </h4>
-              <p className="text-gray-500 mt-2">
+              <p className="text-gray-400 mt-2">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
               </p>
               <a
@@ -121,12 +138,12 @@ export default function Hero() {
                 Our Service
               </a>
             </div>
-            <div className="text-center p-4 bg-white border rounded-lg">
+            <div className="text-center p-4 bg-white dark:bg-black  border rounded-lg">
               <UsersIcon className="text-yellow-400 w-6 h-6 mx-auto mb-2" />
-              <h4 className="font-semibold text-lg text-black">
+              <h4 className="font-semibold text-lg text-black dark:text-white">
                 Why you should choose us
               </h4>
-              <p className="text-gray-500 mt-2">
+              <p className="text-gray-400 mt-2">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
               </p>
               <a
@@ -136,12 +153,12 @@ export default function Hero() {
                 About Us
               </a>
             </div>
-            <div className="text-center p-4 bg-white border rounded-lg">
+            <div className="text-center p-4 bg-white  dark:bg-black  border rounded-lg">
               <BarChartIcon className="text-yellow-400 w-6 h-6 mx-auto mb-2" />
-              <h4 className="font-semibold text-lg text-black">
+              <h4 className="font-semibold text-lg text-black dark:text-white">
                 Our performance
               </h4>
-              <p className="text-gray-500 mt-2">
+              <p className="text-gray-400 mt-2">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit.
               </p>
               <a
