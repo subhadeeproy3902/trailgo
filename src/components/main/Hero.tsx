@@ -240,7 +240,7 @@ const menuItem = [
   },
   {
     name: "Contact",
-    href: "#",
+    href: "/contact",
   },
 ];
 
