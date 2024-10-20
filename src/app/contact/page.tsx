@@ -3,6 +3,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
+import GlobeImg from "../../../public/globe.svg";
+import ProfileImg from "../../../public/women-profile.jpg"
+import { ChatBubbleLeftEllipsisIcon, LifebuoyIcon, MapPinIcon, PhoneIcon } from '@heroicons/react/24/outline';
+
 
 export default function Hero() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -76,36 +80,63 @@ export default function Hero() {
       </nav>
       <div className="py-12 min-h-screen px-4 sm:px-6 lg:px-8">
         <main>
-      
-       <section className="text-center py-16">
-        <h1 className="text-4xl font-bold text-gray-900">Get in touch with our team</h1>
-        <p className="text-gray-500 mt-4">We have the team and know-how to help you scale 10x faster.</p>
-      </section>
-     
-      <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-        <div className="bg-white shadow-lg p-6 rounded-lg text-center">
-          <h3 className="text-lg font-semibold">Chat to Sales</h3>
-          <p className="text-gray-500 mt-2">Speak to our friendly team.</p>
-          <a href="mailto:sales@trailgo.com" className="text-orange-500  hover:text-orange-700 mt-4 block">sales@trailgo.com</a>
-        </div>
-        <div className="bg-white shadow-lg p-6 rounded-lg text-center">
-          <h3 className="text-lg font-semibold">Chat to Support</h3>
-          <p className="text-gray-500 mt-2">We’re here to help.</p>
-          <a href="mailto:support@trailgo.com" className="text-orange-500  hover:text-orange-700 mt-4 block">support@trailgo.com</a>
-        </div>
-        <div className="bg-white shadow-lg p-6 rounded-lg text-center">
-          <h3 className="text-lg font-semibold">Visit Us</h3>
-          <p className="text-gray-500 mt-2">Visit our office HQ.</p>
-          <a href="https://maps.google.com" className="text-orange-500  hover:text-orange-700 mt-4 block" target="_blank" rel="noopener noreferrer">
-            View on Google Maps
-          </a>
-        </div>
-        <div className="bg-white shadow-lg p-6 rounded-lg text-center">
-          <h3 className="text-lg font-semibold">Call Us</h3>
-          <p className="text-gray-500 mt-2">Mon-Fri from 8am to 5pm.</p>
-          <a href="tel:+1555000000" className="text-orange-500  hover:text-orange-700 mt-4 block">+1 (555) 000-0000</a>
-        </div>
-      </section>
+
+          <section className="text-center py-16">
+            <h1 className="text-4xl font-bold text-gray-900">Get in touch with our team</h1>
+            <p className="text-gray-500 mt-4">We have the team and know-how to help you scale 10x faster.</p>
+            <div className="mt-8 bg-gray-100 p-10 rounded-lg">
+
+              <Image
+                src={GlobeImg}
+                className="w-full"
+                alt="Full-Stack-Kit Logo"
+              />
+
+            </div>
+
+          </section>
+
+
+          <section className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+            <div className="bg-white shadow-lg p-6 rounded-lg text-center">
+              <ChatBubbleLeftEllipsisIcon className="w-8 h-8 mx-auto text-gray-700" />
+              <h3 className="text-lg font-semibold mt-4">Chat to Sales</h3>
+              <p className="text-gray-500 mt-2">Speak to our friendly team.</p>
+              <a href="mailto:sales@untitledui.com" 
+              className=" bg-orange-500 hover:bg-orange-700 text-white py-2 px-4 rounded-md mt-4 inline-block ">
+                sales@trailgo.com
+              </a>
+            </div>
+
+            <div className="bg-white shadow-lg p-6 rounded-lg text-center">
+              <LifebuoyIcon className="w-8 h-8 mx-auto text-gray-700" />
+              <h3 className="text-lg font-semibold mt-4">Chat to Support</h3>
+              <p className="text-gray-500 mt-2">We’re here to help.</p>
+              <a href="mailto:support@untitledui.com" className="  bg-orange-500 hover:bg-orange-700 text-white py-2 px-4 rounded-md mt-4 inline-block ">
+                support@trailgo.com
+              </a>
+            </div>
+
+            <div className="bg-white shadow-lg p-6 rounded-lg text-center">
+              <MapPinIcon className="w-8 h-8 mx-auto text-gray-700" />
+              <h3 className="text-lg font-semibold mt-4">Visit Us</h3>
+              <p className="text-gray-500 mt-2">Visit our office HQ.</p>
+              <a href="https://maps.google.com" className=" bg-orange-500 hover:bg-orange-700 text-white py-2 px-4 rounded-md mt-4 inline-block" target="_blank" rel="noopener noreferrer">
+                View on Google Maps
+              </a>
+            </div>
+
+            <div className="bg-white shadow-lg p-6 rounded-lg text-center">
+              <PhoneIcon className="w-8 h-8 mx-auto text-gray-700" />
+              <h3 className="text-lg font-semibold mt-4">Call Us</h3>
+              <p className="text-gray-500 mt-2">Mon-Fri from 8am to 5pm.</p>
+              <a href="tel:+1555000000" className=" bg-orange-500 hover:bg-orange-700 text-white py-2 px-4 rounded-md mt-4 inline-block">
+                +1 (555) 000-0000
+              </a>
+            </div>
+          </section>
+
+
           <section className="mt-16">
             <h2 className="text-2xl font-semibold text-gray-900 text-center">
               Contact Us
@@ -169,7 +200,36 @@ export default function Hero() {
               </div>
             </form>
           </section>
-         
+
+          <section className="bg-white border border-gray-200 mt-5 p-6 rounded-lg flex flex-col md:flex-row items-center justify-between space-y-4 md:space-y-0">
+            <div className="flex items-center">
+              <Image
+                src={ProfileImg}
+                className="w-12 h-12 rounded-full mr-4 object-cover"
+                alt="Profile"
+              />
+
+              <div>
+                <h3 className="text-lg font-semibold">Still have questions?</h3>
+                <p className="text-gray-500">
+                  Can’t find the answer you’re looking for? Please <a href="#" className="text-orange-500 hover:text-orange-700 underline">chat to our friendly team</a>.
+                </p>
+              </div>
+            </div>
+
+            <div className="flex flex-col sm:flex-row items-center sm:space-x-4 space-y-4 sm:space-y-0">
+              <a href="#" className="text-gray-700 border border-gray-300 rounded-md py-2 px-4 flex items-center hover:bg-gray-100">
+                Documentation
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </a>
+              <a href="#" className="bg-orange-500 hover:bg-orange-700 text-white font-bold rounded-md py-2 px-4">
+                Get in touch
+              </a>
+            </div>
+          </section>
+
         </main>
       </div>
     </>
