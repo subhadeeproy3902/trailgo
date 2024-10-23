@@ -289,6 +289,10 @@ const menuItem = [
     name: "Contact",
     href: "/contact",
   },
+  {
+    name: "FAQs & Forum",
+    href: "/FAQs",
+  },
 ];
 
 function HamburgerMenu() {
