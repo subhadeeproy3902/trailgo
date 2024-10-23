@@ -1,5 +1,6 @@
 "use client";
 
+import { resendLogin } from "@/actions/auth";
 import GoogleButton from "@/components/auth/GoogleButton";
 import { MoveLeft } from "lucide-react";
 import Image from "next/image";
@@ -7,20 +8,21 @@ import Link from "next/link";
 import { useState } from "react";
 
 export default function RegisterPage() {
-  const radios = [
-    {
-      name: "Ticket Manager",
-    },
-    {
-      name: "Passenger",
-    },
-  ];
 
-  const [role, setRole] = useState("PASSENGER");
-  console.log(role);
+  const [email, setEmail] = useState("");
+  const [success, setSuccess] = useState("");
+  const [error, setError] = useState("");
+
+  const handleSubmit = async () => {
+    try {
+      await resendLogin(email);
+      setSuccess("Check your email for the login link");
+    } catch (error) {
+      setError("An error occurred. Please try again later.");
+    }
+  };
 
   return (
-    <>
       <div className="justify-between gap-x-8 px-4 py-8 pt-10 md:pt-12 lg:flex lg:p-6 xl:gap-x-10 xl:p-7 2xl:p-10 2xl:pt-10">
         <div className="relative flex w-full items-start pt-4 justify-center lg:w-5/12 2xl:pe-24">
           <div className=" w-full max-w-sm md:max-w-md lg:py-7 lg:ps-3 lg:pt-16 2xl:w-[630px] 2xl:max-w-none 2xl:ps-20 2xl:pt-7">
@@ -53,14 +55,13 @@ export default function RegisterPage() {
               </h2>
             </div>
             <div className="grid grid-cols-1 gap-4 pb-5 w-full md:pb-6 xl:gap-5 xl:pb-7">
-              <GoogleButton role={role} />
+              <GoogleButton  />
             </div>
             <div className="before:content-[' '] relative flex items-center  before:absolute before:left-0 before:top-1/2 before:h-px before:w-full before:bg-gray-100 mb-2 justify-center">
               <span className="relative z-10 inline-block bg-white text-sm font-medium text-gray-500 2xl:text-base dark:bg-gray-50 p-2.5">
                 OR
               </span>
             </div>
-            <form>
               <div className="space-y-5">
                 <div className="flex flex-col [&amp;>label>span]:font-medium">
                   <label className="block mb-4">
@@ -92,15 +93,30 @@ export default function RegisterPage() {
                       <input
                         type="email"
                         placeholder="Enter your email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                         className="w-full border-0 bg-transparent p-0 focus:outline-none focus:ring-0 [&amp;::-ms-clear]:hidden [&amp;::-ms-reveal]:hidden [&amp;::-webkit-search-cancel-button]:hidden [&amp;::-webkit-inner-spin-button]:m-0 [&amp;::-webkit-inner-spin-button]:appearance-none [&amp;::-webkit-outer-spin-button]:m-0 [&amp;::-webkit-outer-spin-button]:appearance-none"
                         name="email"
                       />
                     </span>
                   </label>
                 </div>
+
+                {/* Success and error */}
+                {success && (
+                  <div className="text-green-600 text-sm font-medium">
+                    {success}
+                  </div>
+                )}
+                {error && (
+                  <div className="text-red-600 text-sm font-medium">{error}</div>
+                )}
+
                 <button
                   className="inline-flex font-medium items-center justify-center active:enabled:translate-y-px focus:outline-none focus-visible:ring-[1.8px] focus-visible:ring-offset-2 ring-offset-background transition-colors duration-200 px-5 py-2 text-base h-12 rounded-md border border-transparent dark:backdrop-blur bg-primary hover:bg-primary-dark dark:hover:bg-primary/90 focus-visible:ring-muted text-primary-foreground w-full"
-                  type="submit"
+                  onClick={
+                    handleSubmit
+                  }
                 >
                   <span>Sign in</span>{" "}
                   <svg
@@ -117,7 +133,6 @@ export default function RegisterPage() {
                   </svg>
                 </button>
               </div>
-            </form>
             <p className="font-normal mt-6 text-center leading-loose text-gray-500 lg:mt-8 lg:text-start">
               Already have an account?{" "}
               <Link
@@ -150,6 +165,5 @@ export default function RegisterPage() {
           </div>
         </div>
       </div>
-    </>
   );
 }

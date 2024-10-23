@@ -1,36 +1,93 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Online Railway Commodity Reservation System
 
-## Getting Started
+Trailgo is an innovative online platform designed to simplify and enhance the cargo booking process for railway transportation. It provides a seamless interface for users to reserve, track, and manage commodity shipments across various railway networks. Trailgo caters to multiple user types, including admins, ticket managers, and customers, offering features such as real-time 
+booking availability, cargo tracking, secure payment handling, and an advanced fraud reporting system. The platform's primary objective is to optimize cargo logistics, reduce manual inefficiencies, and promote transparency. With its user-friendly design, Trailgo aims to revolutionize the railway commodity reservation experience.
 
-First, run the development server:
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+Go through: [Canva PPT](https://www.canva.com/design/DAGLgAmP4Qg/JO3mIcuB0Mt88famxqPO_g/view?utm_content=DAGLgAmP4Qg&utm_campaign=designshare&utm_medium=link&utm_source=editor)
+
+
+## Booking 
+
+The form should contain the following:
+
+- Starting point (Semantic Search)
+- Destination point (Semantic Search)
+- Date of journey
+- Goods 
+- Quantity 
+
+Output:
+
+-> `Show the list of the trains`
+
+TrainCard.tsx - 
+
+```
+Train No
+Train Name
+Path
+Available Space
+Fare
+Rating
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+-> `Select a train 'ID'`
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+TrainDetailsAndReservation.tsx
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```
+Train Details with Pics
+SVG Seat Allocation + Updation + Cart Analysis (Fare Updation)
+Security (+Rs 5)
 
-## Learn More
+Proceed to Stripe
+```
+Security -> 
 
-To learn more about Next.js, take a look at the following resources:
+![alt text](image.png)
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Output ->
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+- `Ticket`
 
-## Deploy on Vercel
+Ticket.tsx
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+Ticket ID
+Train Details
+Compartments
+Fare Receipt
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+-> `Cancel\Update Booking`
+
+-> `Track Booking`
+
+-> `Notify Me Checkbox`
+
+## Booking History
+
+## Track Shipment
+
+-> `Select Train 'Id'`
+
+Output:
+
+-> `Stations passed`: Updated by every station master
+
+-> `Live Map`
+
+## Manager - List of Trains
+
+-> `List of trains on that day with number of bookings of that train + Last passed station` 
+
+-> `Arrived trains + Departed Option modification`
+
+## Manager - Train Details
+
+-> `Analysis Graph of train`
+
+## Manager - Departure Station
+
+-> `Contact Owner + Shipment success (No failure)`

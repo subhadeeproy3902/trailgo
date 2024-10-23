@@ -2,10 +2,47 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function Hero() {
   const [menuOpen, setMenuOpen] = useState(false);
+  const [hoveredCard, setHoveredCard] = useState<number | null>(null);
+  const [visible, setVisible] = useState(false); // For animations
+  const [letterIndex, setLetterIndex] = useState(-1); // Start with -1 to not show any letters initially
+
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setVisible(true);
+    }, 100); // Delay for animation effect
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  
+  // Step 3: Start letter animation
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setLetterIndex((prev) => {
+        // Stop after showing all letters
+        if (prev < text.length - 1) {
+          return prev + 1;
+        }
+        return prev; // No further increment
+      });
+    }, 100); // 3 seconds delay
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const text = "Welcome to Trailgo"; // Step 4: This is the text being animated
+
+  const handleMouseEnter = (cardId: number) => {
+    setHoveredCard(cardId);
+  };
+
+  const handleMouseLeave = () => {
+    setHoveredCard(null);
+  };
 
   return (
     <>
@@ -24,13 +61,15 @@ export default function Hero() {
             />
           </a>
           <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-            <Link href="/register"
+            <Link
+              href="/register"
               className="text-white bg-orange-500 hover:bg-orange-600 focus:ring-4 focus:outline-none mr-6 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
               Register
             </Link>
-            <Link href="/login"
-              className="text-white bg-muted-foreground focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            <Link
+              href="/login"
+              className="text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
               Login
             </Link>
@@ -86,12 +125,29 @@ export default function Hero() {
         <main>
           <section className="text-center py-12">
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-              Welcome to Trailgo
-            </h1>
-            <h2 className="text-2xl text-gray-700 mb-6">
+  {text.split("").map((letter, index) => (
+    <span
+      key={index}
+      className={`inline-block transition-transform duration-500 transform ${
+        index <= letterIndex ? "opacity-100" : "opacity-0"
+      }`}
+    >
+      {letter === " " ? "\u00A0" : letter}  {/* Add this line to handle spaces */}
+    </span>
+  ))}
+</h1>
+            <h2
+              className={`text-2xl text-gray-700 mb-6 transition-transform transform ${
+                visible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+              }`}
+            >
               The best place to find your next adventure
             </h2>
-            <p className="max-w-2xl mx-auto text-gray-500 mb-6">
+            <p
+              className={`max-w-2xl mx-auto text-gray-500 mb-6 transition-transform transform ${
+                visible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+              }`}
+            >
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
               auctor, erat id lacinia ultrices, velit lectus aliquam nisi, nec
               tempor nunc nunc vel justo
@@ -100,86 +156,78 @@ export default function Hero() {
               <button className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded">
                 Get Started
               </button>
-              <button className="bg-transparent hover:bg-gray-100 text-orange-700 font-semibold py-2 px-4 border border-orange-500 rounded">
+              <button className="bg-transparent hover:bg-gray-100 text-green-700 font-semibold py-2 px-4 border border-green-500 rounded">
                 Learn More
               </button>
             </div>
           </section>
-          <section className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div className="text-center p-4 bg-white border rounded-lg">
-              <ThumbsUpIcon className="text-yellow-400 w-6 h-6 mx-auto mb-2" />
-              <h4 className="font-semibold text-lg text-black">
-                Service we can help you with
-              </h4>
-              <p className="text-gray-500 mt-2">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              </p>
-              <a
-                className="text-orange-500 hover:text-orange-700 mt-2 inline-block"
-                href="#"
+                    <section className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {cardData.map((card, index) => (
+              <div
+                key={index}
+                className={`text-center p-4 border rounded-lg transition-transform transform ${
+                  hoveredCard === index ? 'scale-105' : ''
+                } ${card.color}`}
+                onMouseEnter={() => handleMouseEnter(index)}
+                onMouseLeave={handleMouseLeave}
               >
-                Our Service
-              </a>
-            </div>
-            <div className="text-center p-4 bg-white border rounded-lg">
-              <UsersIcon className="text-yellow-400 w-6 h-6 mx-auto mb-2" />
-              <h4 className="font-semibold text-lg text-black">
-                Why you should choose us
-              </h4>
-              <p className="text-gray-500 mt-2">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              </p>
-              <a
-                className="text-orange-500 hover:text-orange-700 mt-2 inline-block"
-                href="#"
-              >
-                About Us
-              </a>
-            </div>
-            <div className="text-center p-4 bg-white border rounded-lg">
-              <BarChartIcon className="text-yellow-400 w-6 h-6 mx-auto mb-2" />
-              <h4 className="font-semibold text-lg text-black">
-                Our performance
-              </h4>
-              <p className="text-gray-500 mt-2">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-              </p>
-              <a
-                className="text-orange-500 hover:text-orange-700 mt-2 inline-block"
-                href="#"
-              >
-                View Stats
-              </a>
-            </div>
+                <div className="relative">
+                  <div
+                    className={`absolute top-0 left-0 transform transition-transform ${
+                      hoveredCard === index ? 'opacity-100' : 'opacity-0'
+                    }`}
+                    style={{
+                      width: '10px',
+                      height: '10px',
+                      borderRadius: '50%',
+                      backgroundColor: 'orange',
+                      pointerEvents: 'none',
+                      transform: hoveredCard === index ? 'translate(calc(-50% + 2px), calc(-50% + 2px))' : 'translate(-50%, -50%)',
+                      transition: 'transform 0.2s ease',
+                    }}
+                  />
+                  <span className="block py-2">{card.icon}</span>
+                  <h4 className={`font-semibold text-lg ${hoveredCard === index ? 'text-black' : 'text-black'}`}>{card.title}</h4>
+                  <p className={`mt-2 ${hoveredCard === index ? 'text-black' : 'text-gray-500'}`}>{card.description}</p>
+                  <a className="text-orange-500 hover:text-orange-700 mt-2 inline-block" href="#">
+                    {card.linkText}
+                  </a>
+                </div>
+              </div>
+            ))}
           </section>
+
         </main>
       </div>
     </>
   );
 }
 
-function BarChartIcon(props: any) {
-  return (
-    <svg
-      {...props}
-      xmlns="http://www.w3.org/2000/svg"
-      width="24"
-      height="24"
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="2"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    >
-      <line x1="12" x2="12" y1="20" y2="10" />
-      <line x1="18" x2="18" y1="20" y2="4" />
-      <line x1="6" x2="6" y1="20" y2="16" />
-    </svg>
-  );
-}
+const cardData = [
+  {
+    icon: <ThumbsUpIcon className="text-yellow-400 w-6 h-6 mx-auto mb-2" />,
+    title: "Service we can help you with",
+    description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
+    linkText: "Our Service",
+    color: "bg-orange-200", // Solid orange background for the first card
+  },
+  {
+    icon: <UsersIcon className="text-yellow-400 w-6 h-6 mx-auto mb-2" />,
+    title: "Join our community",
+    description: "Maecenas auctor, erat id lacinia ultrices.",
+    linkText: "Learn more",
+    color: "bg-white-200",
+  },
+  {
+    icon: <UsersIcon className="text-yellow-400 w-6 h-6 mx-auto mb-2" />,
+    title: "Connect with us",
+    description: "Aliquam nisi, nec tempor nunc nunc vel justo.",
+    linkText: "Contact us",
+    color: "bg-green-200",
+  },
+];
 
-function ThumbsUpIcon(props: any) {
+function ThumbsUpIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}
@@ -198,8 +246,7 @@ function ThumbsUpIcon(props: any) {
     </svg>
   );
 }
-
-function UsersIcon(props: any) {
+function UsersIcon(props: React.SVGProps<SVGSVGElement>) {
   return (
     <svg
       {...props}
@@ -240,7 +287,7 @@ const menuItem = [
   },
   {
     name: "Contact",
-    href: "#",
+    href: "/contact",
   },
 ];
 
@@ -262,3 +309,6 @@ function HamburgerMenu() {
     </svg>
   );
 }
+
+
+
