@@ -7,34 +7,58 @@ import { useState, useEffect } from "react";
 export default function Hero() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [hoveredCard, setHoveredCard] = useState<number | null>(null);
-  const [visible, setVisible] = useState(false); // For animations
-  const [letterIndex, setLetterIndex] = useState(-1); // Start with -1 to not show any letters initially
+  const [visible, setVisible] = useState(false);
+  const [letterIndex, setLetterIndex] = useState(-1);
+  const [currentSlide, setCurrentSlide] = useState(0);
+
+  const carouselItems = [
+    {
+      image: "/1.jpg",
+      title: "Explore Amazing Destinations",
+      description: "Discover the world's most breathtaking locations",
+    },
+    {
+      image: "/2.jpg",
+      title: "Travel in Style",
+      description: "Experience luxury and comfort in every journey",
+    },
+    {
+      image: "/3.jpg",
+      title: "Create Memories",
+      description: "Make every moment count with Trailgo",
+    },
+  ];
 
   useEffect(() => {
     const timer = setTimeout(() => {
       setVisible(true);
-    }, 100); // Delay for animation effect
+    }, 100);
 
     return () => clearTimeout(timer);
   }, []);
 
-  
-  // Step 3: Start letter animation
   useEffect(() => {
     const interval = setInterval(() => {
       setLetterIndex((prev) => {
-        // Stop after showing all letters
         if (prev < text.length - 1) {
           return prev + 1;
         }
-        return prev; // No further increment
+        return prev;
       });
-    }, 100); // 3 seconds delay
+    }, 100);
 
     return () => clearInterval(interval);
   }, []);
 
-  const text = "Welcome to Trailgo"; // Step 4: This is the text being animated
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentSlide((prev) => (prev + 1) % carouselItems.length);
+    }, 5000);
+
+    return () => clearInterval(interval);
+  }, []);
+
+  const text = "Welcome to Trailgo";
 
   const handleMouseEnter = (cardId: number) => {
     setHoveredCard(cardId);
@@ -46,7 +70,7 @@ export default function Hero() {
 
   return (
     <>
-      <nav className="bg-transparent backdrop-blur-3xl w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
+      <nav className="bg-white/80 backdrop-blur-lg fixed w-full z-50 top-0 start-0 border-b border-gray-200 dark:border-gray-600 shadow-lg">
         <div className="flex flex-wrap items-center justify-between mx-4 p-4">
           <a
             href="#"
@@ -57,38 +81,36 @@ export default function Hero() {
               height={500}
               src="/Train.webp"
               className="h-10 w-10"
-              alt="Full-Stack-Kit Logo"
+              alt="Logo"
             />
           </a>
           <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
             <Link
               href="/register"
-              className="text-white bg-orange-500 hover:bg-orange-600 focus:ring-4 focus:outline-none mr-6 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              className="text-white bg-orange-500 hover:bg-orange-600 focus:ring-4 focus:outline-none mr-6 focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center transition-all duration-300 hover:scale-105"
             >
               Register
             </Link>
             <Link
               href="/login"
-              className="text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+              className="text-white bg-green-500 hover:bg-green-600 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center transition-all duration-300 hover:scale-105"
             >
               Login
             </Link>
             <button
-              data-collapse-toggle="navbar-sticky"
-              type="button"
-              className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-200 dark:text-gray-400 dark:hover:bg-gray-700 dark:focus:ring-gray-600"
               onClick={() => setMenuOpen(!menuOpen)}
+              className="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-gray-500 rounded-lg md:hidden hover:bg-gray-100 focus:outline-none focus:ring-2"
             >
               <HamburgerMenu />
             </button>
           </div>
           <div className="items-center justify-between hidden w-full md:flex md:w-auto md:order-1">
-            <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg  md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0  dark:bg-gray-800 dark:border-gray-700">
+            <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0">
               {menuItem.map((item) => (
                 <li key={item.name}>
                   <a
                     href={item.href}
-                    className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                    className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-orange-500 md:p-0 transition-colors duration-300"
                   >
                     {item.name}
                   </a>
@@ -96,14 +118,14 @@ export default function Hero() {
               ))}
             </ul>
           </div>
-          {menuOpen ? (
+          {menuOpen && (
             <div className="items-center justify-between w-full md:hidden md:w-auto md:order-1">
-              <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50 md:space-x-8 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 md:bg-white dark:bg-gray-800 md:dark:bg-gray-900 dark:border-gray-700">
+              <ul className="flex flex-col p-4 md:p-0 mt-4 font-medium border border-gray-100 rounded-lg bg-gray-50">
                 {menuItem.map((item) => (
                   <li key={item.name}>
                     <a
                       href={item.href}
-                      className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                      className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 transition-colors duration-300"
                     >
                       {item.name}
                     </a>
@@ -111,41 +133,75 @@ export default function Hero() {
                 ))}
               </ul>
             </div>
-          ) : null}
+          )}
         </div>
       </nav>
-      <Image
-        width={500}
-        height={500}
-        src="/bg.webp"
-        className="w-full h-full absolute top-0 left-0 -z-10 object-cover"
-        alt="Full-Stack-Kit Background"
-      />
-      <div className="py-12 min-h-screen px-4 sm:px-6 lg:px-8">
+
+      <div className="relative h-[600px] mt-16">
+        {carouselItems.map((item, index) => (
+          <div
+            key={index}
+            className={`absolute top-0 left-0 w-full h-full transition-opacity duration-1000 ${
+              currentSlide === index ? "opacity-100" : "opacity-0"
+            }`}
+          >
+            <Image
+              width={1920}
+              height={1080}
+              src={item.image}
+              className="w-full h-full object-cover"
+              alt={item.title}
+            />
+            <div className="absolute inset-0 bg-black/40 flex items-center justify-center text-white">
+              <div className="text-center">
+                <h2 className="text-4xl font-bold mb-4">{item.title}</h2>
+                <p className="text-xl">{item.description}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+          {carouselItems.map((_, index) => (
+            <button
+              key={index}
+              className={`w-3 h-3 rounded-full ${
+                currentSlide === index ? "bg-white" : "bg-white/50"
+              }`}
+              onClick={() => setCurrentSlide(index)}
+            />
+          ))}
+        </div>
+      </div>
+
+      <div className="py-12 px-4 sm:px-6 lg:px-8">
         <main>
           <section className="text-center py-12">
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
-  {text.split("").map((letter, index) => (
-    <span
-      key={index}
-      className={`inline-block transition-transform duration-500 transform ${
-        index <= letterIndex ? "opacity-100" : "opacity-0"
-      }`}
-    >
-      {letter === " " ? "\u00A0" : letter}  {/* Add this line to handle spaces */}
-    </span>
-  ))}
-</h1>
+              {text.split("").map((letter, index) => (
+                <span
+                  key={index}
+                  className={`inline-block transition-transform duration-500 transform ${
+                    index <= letterIndex ? "opacity-100" : "opacity-0"
+                  }`}
+                >
+                  {letter === " " ? "\u00A0" : letter}
+                </span>
+              ))}
+            </h1>
             <h2
               className={`text-2xl text-gray-700 mb-6 transition-transform transform ${
-                visible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+                visible
+                  ? "translate-y-0 opacity-100"
+                  : "translate-y-10 opacity-0"
               }`}
             >
               The best place to find your next adventure
             </h2>
             <p
               className={`max-w-2xl mx-auto text-gray-500 mb-6 transition-transform transform ${
-                visible ? "translate-y-0 opacity-100" : "translate-y-10 opacity-0"
+                visible
+                  ? "translate-y-0 opacity-100"
+                  : "translate-y-10 opacity-0"
               }`}
             >
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas
@@ -153,50 +209,174 @@ export default function Hero() {
               tempor nunc nunc vel justo
             </p>
             <div className="space-x-4">
-              <button className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded">
+              <button className="bg-orange-500 hover:bg-orange-700 text-white font-bold py-2 px-4 rounded transition-all duration-300 hover:scale-105">
                 Get Started
               </button>
-              <button className="bg-transparent hover:bg-gray-100 text-green-700 font-semibold py-2 px-4 border border-green-500 rounded">
+              <button className="bg-transparent hover:bg-gray-100 text-green-700 font-semibold py-2 px-4 border border-green-500 rounded transition-all duration-300 hover:scale-105">
                 Learn More
               </button>
             </div>
           </section>
-                    <section className="grid grid-cols-1 md:grid-cols-3 gap-8">
+
+          <section className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {cardData.map((card, index) => (
               <div
                 key={index}
-                className={`text-center p-4 border rounded-lg transition-transform transform ${
-                  hoveredCard === index ? 'scale-105' : ''
+                className={`relative overflow-hidden rounded-xl shadow-lg transition-all duration-300 ${
+                  hoveredCard === index ? "transform scale-105" : ""
                 } ${card.color}`}
                 onMouseEnter={() => handleMouseEnter(index)}
                 onMouseLeave={handleMouseLeave}
               >
-                <div className="relative">
+                <div className="p-6">
+                  <div className="absolute top-4 right-4">
+                    <span className="px-3 py-1 text-sm font-semibold text-white bg-orange-500 rounded-full">
+                      {card.badge}
+                    </span>
+                  </div>
                   <div
-                    className={`absolute top-0 left-0 transform transition-transform ${
-                      hoveredCard === index ? 'opacity-100' : 'opacity-0'
+                    className={`transition-transform duration-300 ${
+                      hoveredCard === index ? "transform -translate-y-2" : ""
                     }`}
-                    style={{
-                      width: '10px',
-                      height: '10px',
-                      borderRadius: '50%',
-                      backgroundColor: 'orange',
-                      pointerEvents: 'none',
-                      transform: hoveredCard === index ? 'translate(calc(-50% + 2px), calc(-50% + 2px))' : 'translate(-50%, -50%)',
-                      transition: 'transform 0.2s ease',
-                    }}
+                  >
+                    <div className="relative z-10">
+                      <div className="p-3 mb-4 inline-block bg-white rounded-lg">
+                        {card.icon}
+                      </div>
+                      <h4 className="font-bold text-xl mb-3">{card.title}</h4>
+                      <p className="text-gray-600 mb-4">{card.description}</p>
+                      <a
+                        href="#"
+                        className="inline-flex items-center text-orange-500 hover:text-orange-600 font-semibold"
+                      >
+                        {card.linkText}
+                        <svg
+                          className="w-4 h-4 ml-2 transition-transform duration-300 transform group-hover:translate-x-1"
+                          fill="none"
+                          stroke="currentColor"
+                          viewBox="0 0 24 24"
+                        >
+                          <path
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth="2"
+                            d="M9 5l7 7-7 7"
+                          />
+                        </svg>
+                      </a>
+                    </div>
+                  </div>
+                  <div
+                    className={`absolute inset-0 bg-gradient-to-r ${
+                      hoveredCard === index
+                        ? "from-orange-100/20 to-green-100/20"
+                        : ""
+                    } transition-opacity duration-300`}
                   />
-                  <span className="block py-2">{card.icon}</span>
-                  <h4 className={`font-semibold text-lg ${hoveredCard === index ? 'text-black' : 'text-black'}`}>{card.title}</h4>
-                  <p className={`mt-2 ${hoveredCard === index ? 'text-black' : 'text-gray-500'}`}>{card.description}</p>
-                  <a className="text-orange-500 hover:text-orange-700 mt-2 inline-block" href="#">
-                    {card.linkText}
-                  </a>
                 </div>
               </div>
             ))}
           </section>
+          <section className="bg-gray-100 py-16">
+            <div className="max-w-6xl mx-auto px-4 text-center">
+              <h2 className="text-3xl font-bold text-gray-800 mb-8">
+                Why Choose Trailgo?
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div className="bg-white p-6 rounded-lg shadow-lg">
+                  <h3 className="text-xl font-semibold text-gray-800 mb-4">
+                    Unmatched Expertise
+                  </h3>
+                  <p className="text-gray-600">
+                    Our experienced travel guides bring deep knowledge of each
+                    destination, ensuring you have an enriching experience.
+                  </p>
+                </div>
+                <div className="bg-white p-6 rounded-lg shadow-lg">
+                  <h3 className="text-xl font-semibold text-gray-800 mb-4">
+                    Personalized Adventures
+                  </h3>
+                  <p className="text-gray-600">
+                    We tailor every itinerary to suit your interests and
+                    preferences, creating the trip of a lifetime just for you.
+                  </p>
+                </div>
+                <div className="bg-white p-6 rounded-lg shadow-lg">
+                  <h3 className="text-xl font-semibold text-gray-800 mb-4">
+                    Community of Travelers
+                  </h3>
+                  <p className="text-gray-600">
+                    Join a thriving community of like-minded explorers and share
+                    your travel experiences with people from around the world.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </section>
 
+          <section className="py-16">
+            <div className="max-w-6xl mx-auto px-4 text-center">
+              <h2 className="text-3xl font-bold text-gray-800 mb-8">
+                Testimonials
+              </h2>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <div className="bg-white p-6 rounded-lg shadow-lg">
+                  <p className="text-gray-600 italic mb-4">
+                    "Trailgo made our vacation unforgettable. The guided tours
+                    were fantastic, and everything was so well organized."
+                  </p>
+                  <p className="text-gray-800 font-bold">- Emily R.</p>
+                </div>
+                <div className="bg-white p-6 rounded-lg shadow-lg">
+                  <p className="text-gray-600 italic mb-4">
+                    "I loved the personalized itineraries. The team really took
+                    care of our preferences, and we saw some amazing hidden
+                    gems."
+                  </p>
+                  <p className="text-gray-800 font-bold">- John D.</p>
+                </div>
+              </div>
+            </div>
+          </section>
+          <footer className="bg-gray-900 text-white py-8 mt-16">
+            <div className="max-w-6xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div>
+                <h5 className="text-lg font-semibold mb-4">About Us</h5>
+                <p className="text-gray-400">
+                  Trailgo is your ultimate travel companion, providing premium
+                  travel packages, guided tours, and a community of explorers.
+                </p>
+              </div>
+              <div>
+                <h5 className="text-lg font-semibold mb-4">Quick Links</h5>
+                <ul className="space-y-2">
+                  {menuItem.map((item) => (
+                    <li key={item.name}>
+                      <Link
+                        href={item.href}
+                        className="text-gray-400 hover:text-orange-500"
+                      >
+                        {item.name}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div>
+                <h5 className="text-lg font-semibold mb-4">Contact Us</h5>
+                <p className="text-gray-400">Email: contact@trailgo.com</p>
+                <p className="text-gray-400">Phone: +123 456 7890</p>
+                <p className="text-gray-400">
+                  Address: 123 Adventure Lane, Travel City, World
+                </p>
+              </div>
+            </div>
+            <div className="border-t border-gray-700 mt-8 pt-4 text-center">
+              <p className="text-gray-500">
+                &copy; {new Date().getFullYear()} Trailgo. All rights reserved.
+              </p>
+            </div>
+          </footer>
         </main>
       </div>
     </>
@@ -309,6 +489,3 @@ function HamburgerMenu() {
     </svg>
   );
 }
-
-
-
