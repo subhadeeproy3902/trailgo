@@ -55,13 +55,15 @@ function Footer() {
 				<ul className="flex gap-8 text-[#153666] justify-center items-center">
 					<li><Link href="#" className="hover:text-[#1a2f4d] transition-colors">Home</Link></li>
 					<li><Link href="#" className="hover:text-[#1a2f4d] transition-colors">About</Link></li>
-					<li><Link href="#" className="hover:text-[#1a2f4d] transition-colors">Team</Link></li>
-					<li><Link href="/contactus/" className="hover:text-[#1a2f4d] transition-colors">Contact</Link></li>
+					<li><Link href="#" className="hover:text-[#1a2f4d] transition-colors">Services</Link></li>
+					<li><Link href="/contact/" className="hover:text-[#1a2f4d] transition-colors">Pricing</Link></li>
+                    <li><Link href="#" className="hover:text-[#1a2f4d] transition-colors">Contact</Link></li>
+
+
 				</ul>
 			</div>
 			<div className="text-[#153666] border-t-2 border-[#1a2f4d] pt-2 text-center font-mono text-xs md:text-base">
-				Made with <span className="animate-pulse">❤️</span> by AI Alchemists • ©
-				2024
+             Trailgo or its contributors. © 2024 All rights reserved 
 			</div>
 		</div>
 	);
