@@ -15,6 +15,7 @@
   "dependencies": {
     "@auth/prisma-adapter": "^2.4.2",
     "@gsap/react": "^2.1.1",
+    "@heroicons/react": "^2.1.5",
     "@prisma/client": "^5.18.0",
     "@radix-ui/react-avatar": "^1.1.0",
     "@radix-ui/react-dialog": "^1.1.1",
@@ -26,7 +27,6 @@
     "@radix-ui/react-tabs": "^1.1.0",
     "@react-email/components": "^0.0.25",
     "@types/bcryptjs": "^2.4.6",
-    "@heroicons/react":"^2.1.5",
     "bcryptjs": "^2.4.3",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
@@ -41,6 +41,7 @@
     "react-email": "2.1.6",
     "tailwind-merge": "^2.5.0",
     "tailwindcss-animate": "^1.0.7",
+    "trailgo": ".",
     "zod": "^3.23.8"
   },
   "devDependencies": {
